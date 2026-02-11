@@ -6,7 +6,7 @@ A collection of Claude Code skills for science content operations.
 
 | Skill | Description |
 |-------|-------------|
-| **sciencepedia** | Search and look up SciencePedia concept URLs from sitemap (~145k entries) |
+| **sciencepedia** | Search SciencePedia concepts from sitemap (~145k entries) and generate concept cards |
 | **x-news-post** | Draft X (Twitter) posts for science/tech news stories for the Bohrium News account |
 | **paper-scout** | Discover and rank trending papers as candidates for Paper of the Day |
 | **paper-post-prep** | Prepare Paper of the Day assets for LinkedIn + X posting |

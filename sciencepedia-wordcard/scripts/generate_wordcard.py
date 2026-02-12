@@ -181,8 +181,10 @@ def guess_category(slug):
 
 
 # ── Font Helper (支持字体层级) ─────────────────────────────────
+_SKILL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "fonts")
 FONT_PATHS = {
     "title": [  # Plus Jakarta Sans Bold — 品牌字体，标题用
+        os.path.join(_SKILL_DIR, "PlusJakartaSans-Bold.ttf"),
         os.path.expanduser("~/Library/Fonts/PlusJakartaSans-Bold.ttf"),
         "/Library/Fonts/PlusJakartaSans-Bold.ttf",
         # 备选
@@ -191,6 +193,7 @@ FONT_PATHS = {
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
     ],
     "body": [  # Plus Jakarta Sans Regular — 品牌字体，正文用
+        os.path.join(_SKILL_DIR, "PlusJakartaSans-Regular.ttf"),
         os.path.expanduser("~/Library/Fonts/PlusJakartaSans-Regular.ttf"),
         "/Library/Fonts/PlusJakartaSans-Regular.ttf",
         # 备选
@@ -1613,11 +1616,36 @@ ILLUST_FUNCS = {
 
 
 # ── URL / Scraping ──────────────────────────────────────────
+def _lookup_slug(query):
+    """Use sciencepedia lookup.py for smart slug resolution (5-layer fuzzy matching)."""
+    lookup_script = os.path.join(os.path.dirname(__file__), "..", "..", "sciencepedia", "scripts", "lookup.py")
+    if not os.path.exists(lookup_script):
+        return None
+    try:
+        result = subprocess.run(
+            [sys.executable, lookup_script, "--top", "1", query],
+            capture_output=True, text=True, timeout=30
+        )
+        if result.returncode == 0:
+            data = json.loads(result.stdout)
+            hits = data.get(query, [])
+            if hits and hits[0].get("slug"):
+                hit = hits[0]
+                print(f"  Lookup: '{query}' → {hit['name']} ({hit['match_type']}, score={hit['score']})", file=sys.stderr)
+                return hit["slug"]
+    except Exception as e:
+        print(f"  Lookup fallback: {e}", file=sys.stderr)
+    return None
+
+
 def parse_input(raw):
     raw = raw.strip().rstrip("/")
     if raw.startswith("http"):
         return raw.split("/")[-1], raw
-    slug = raw.lower().replace(" ", "_").replace("-", "_")
+    # Try smart lookup first, fall back to simple slug conversion
+    slug = _lookup_slug(raw)
+    if not slug:
+        slug = raw.lower().replace(" ", "_").replace("-", "_")
     return slug, f"{BASE_URL}/{slug}"
 
 

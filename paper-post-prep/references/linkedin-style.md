@@ -4,7 +4,7 @@
 
 - **Mainpost length**: 1200-1800 characters
 - **Language**: English
-- **Structure**: Mainpost + Reply 1 (paper link) + Reply 2 (SP concept links)
+- **Structure**: Mainpost + 1 Reply (paper link + SP concept links, all in one reply)
 - **Hashtag format**: `#PaperOfTheDay` (always first), then 3-5 topic-specific tags
 - **No links in mainpost** — all links go in replies to keep the mainpost clean
 
@@ -28,25 +28,21 @@ Avoid vague "transforms the field" language.]
 #PaperOfTheDay #Topic1 #Topic2 #Topic3
 ```
 
-### Reply 1 (论文链接)
+### Reply (论文 + SP 词条, all in one reply)
 ```
-📄 Read the paper on Bohrium:
+📄 Paper on Bohrium
 {Bohrium paper URL}
 
-💻 Code: {GitHub repo URL}
-```
+💻 Code
+{GitHub repo URL}
 
-### Reply 2 (SP 词条)
-```
-🔬 Key concepts explained:
-
-{Concept 1 name}
+🔬 {Concept 1 name}
 {SciencePedia URL 1}
 
-{Concept 2 name}
+🔬 {Concept 2 name}
 {SciencePedia URL 2}
 
-{Concept 3 name}
+🔬 {Concept 3 name}
 {SciencePedia URL 3}
 ```
 
@@ -75,7 +71,7 @@ Avoid vague "transforms the field" language.]
 | Length | 650-1400 chars | 1200-1800 chars |
 | Depth | One core insight | Mechanism + impact |
 | Tone | Smart friend sharing | Professional colleague explaining |
-| Structure | Mainpost + thread 1 (links) + thread 2 (concepts) | Mainpost + reply 1 (links) + reply 2 (concepts) |
+| Structure | Mainpost + 1 thread (links + ¹²³ concepts) | Mainpost + 1 reply (links + concepts) |
 | Author tags | @handles | @FullName (Institution) |
 | Hashtag style | #CamelCase | #CamelCase |
 | Annotations | Superscript ¹ ² ³ for concepts | None |
@@ -152,5 +148,4 @@ encouraging.
 #PaperOfTheDay #PancreaticCancer #CancerResearch #KRAS #PrecisionOncology
 ```
 
-**Reply 1:** 📄 Bohrium paper link + code repo
-**Reply 2:** 🔬 3 SciencePedia concept URLs
+**Reply:** 📄 Bohrium paper link + code repo + 🔬 3 SciencePedia concept URLs

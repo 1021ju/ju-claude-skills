@@ -133,29 +133,30 @@ Search in this order:
 
 Read the LinkedIn style guide: `references/linkedin-style.md`
 
-LinkedIn posts have **3 parts**: a mainpost + 2 replies.
+LinkedIn posts have **2 parts**: a mainpost + 1 reply.
 
 **Mainpost** (1200-1800 characters):
 - 🚨 hook → context → author attribution → mechanism → impact → hashtags
-- **No links in the mainpost** — all links go in replies
+- **No links in the mainpost** — all links go in the reply
 - Author names written as `@Name (Institution)` format for easy tagging
 - `#PaperOfTheDay` always first hashtag
 - **Vary the framing** — don't use "milestone study", "breakthrough transforms", "charts a new path" every time. See anti-patterns in the style guide
 - **More technical depth than X** — explain the mechanism, include specific numbers/benchmarks
 - **One honest caveat** — limitations, caveats, "in mice" disclaimers build credibility
+- **Minimize colons** — prefer commas, dashes, or restructuring over colons. One or two per post max
 
-**Reply 1** (论文链接):
-- Bohrium paper link (NOT arXiv — drive traffic to Bohrium)
-- GitHub repo link if available
-
-**Reply 2** (SP 词条):
-- 3 SciencePedia concept URLs with concept names
+**Reply** (论文 + SP 词条, all in one reply):
+- 📄 Bohrium paper link (NOT arXiv — drive traffic to Bohrium)
+- 💻 GitHub repo link if available
+- 🔬 3 SciencePedia concept names + URLs (name and URL only, no explanations)
 
 **LinkedIn 艾特备注 table**: Provide a separate table mapping each `@Name` in the mainpost to their LinkedIn profile URL, so the user can quickly find and tag them when posting.
 
 ### Step 6: Generate X Post
 
-X posts have **3 parts**: a mainpost + 2 threads. Minimal emoji — only 🚨 for the hook line, nothing else.
+X posts have **2 parts**: a mainpost + 1 thread. Minimal emoji — only 🚨 for the hook line, nothing else.
+
+**Superscript annotations:** Mark 3 key concepts in the mainpost text with superscript numbers ¹ ² ³. Place each superscript right after the first natural mention of the concept. These correspond to numbered SciencePedia entries in the thread.
 
 **Mainpost structure:**
 
@@ -166,30 +167,32 @@ X posts have **3 parts**: a mainpost + 2 threads. Minimal emoji — only 🚨 fo
 
 @handle1, @handle2, and @handle3 (Institution) [what they did / what they found — 1-2 sentences framing the problem and approach]
 
-[Mechanism paragraph 1: explain the problem in concrete terms — why current approaches fail, what goes wrong]
+[Mechanism paragraph 1: explain the problem in concrete terms — why current approaches fail, what goes wrong. Mark a key concept with ¹ on first mention.]
 
-[Mechanism paragraph 2: explain the solution with specific details. Use numbered lists (1. 2. 3. 4.) for multi-part contributions]
+[Mechanism paragraph 2: explain the solution with specific details. Use numbered lists (1. 2. 3. 4.) for multi-part contributions. Mark concepts with ² ³ where natural.]
 
 [Result paragraph: concrete numbers, key insight in plain language, scale/scope]
 
-Paper and code below. [Venue/acceptance info]
+Paper and explainers below. [Venue/acceptance info]
 ```
 
 **Writing guidelines:**
 - **No emoji** except 🚨 on the hook line. No 📑📍🔷👇1️⃣ etc.
-- **No links in the mainpost** — all links go in threads
-- `#POTD` (Paper of the Day) always on the second line
+- **No links in the mainpost** — all links go in the thread
+- `#POTD` (Paper of the Day) always on the second line. No other hashtags in X mainpost — `#POTD` is the only one
 - @handles woven naturally with (Institution) after the group
+- **Closing line** — always "Paper and explainers below." (not "code below" — we don't promote raw repo links in the mainpost)
+- **Superscript placement** — attach ¹ ² ³ to key technical terms where they first appear naturally. Don't force all three into one sentence
 - **Wording matters** — don't write like a paper abstract. Use tension in the hook ("Right answers, wrong lesson"), explain *why* something fails, not just *that* it fails. Concrete > abstract
+- **Minimize colons** — prefer commas, dashes, or restructuring over colons. One or two per post max
 - Numbered lists use plain `1. 2. 3.` not emoji numbers
 
-**Thread 1** (论文链接):
-- Bohrium paper link (NOT arXiv)
-- GitHub repo link if available
-
-**Thread 2** (SP 词条):
-- Each concept: name + 1-2 sentence explanation connecting to this paper + SciencePedia URL
-- No emoji prefixes on concept entries
+**Thread** (论文 + SP 词条, all in one thread):
+- 📄 Bohrium paper link (NOT arXiv — drive traffic to Bohrium)
+- 💻 GitHub repo link if available
+- ¹ Concept Name + SciencePedia URL (name and URL only, no explanations)
+- ² Concept Name + SciencePedia URL
+- ³ Concept Name + SciencePedia URL
 
 Look up SciencePedia concepts:
 ```bash
@@ -226,11 +229,8 @@ Show everything together for user review:
 **Mainpost:**
 {mainpost text — no links}
 
-**Reply 1 (论文链接):**
-{Bohrium link + repo link}
-
-**Reply 2 (SP 词条):**
-{3 SciencePedia concept URLs}
+**Reply (论文 + SP 词条):**
+{Bohrium link + repo link + 3 SciencePedia concept names & URLs}
 
 **LinkedIn 艾特备注:**
 | 正文中的 @名字 | LinkedIn URL |
@@ -239,13 +239,10 @@ Show everything together for user review:
 
 ### X Post
 **Mainpost:**
-{mainpost text — no links}
+{mainpost text with ¹ ² ³ superscript annotations — no links}
 
-**Thread 1 (论文链接):**
-{Bohrium link + repo link}
-
-**Thread 2 (SP 词条):**
-{concept explanations with SciencePedia URLs}
+**Thread (论文 + SP 词条):**
+{Bohrium link + repo link + numbered ¹ ² ³ SciencePedia concept names & URLs}
 ```
 
 Ask the user if they want adjustments to any section.

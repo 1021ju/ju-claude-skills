@@ -50,21 +50,7 @@ Avoid vague "transforms the field" language.]
 
 ## Opening Emoji
 
-**Don't default to 🚨 every time.** The opening emoji should match the paper's topic and tone. Use 1 or 2 emojis.
-
-Examples:
-- 🧬 genetics/biology paper
-- 🧠 neuroscience or cognitive science
-- ⚡ energy, physics, performance breakthroughs
-- 🔬 experimental methods, lab work
-- 💊 drug discovery, medical
-- 🤖 robotics, AI agents
-- 🧪 chemistry, materials science
-- 🌍 climate, earth science
-- 🔥 surprisingly strong results (any field)
-- 🚨 urgent/safety implications, corrections
-
-Combine when appropriate: 🧬🔬 for a genomics methods paper, 🤖⚡ for efficient AI systems.
+**Don't default to 🚨 every time.** Pick 1-2 emojis that fit the paper's content and tone. No fixed mapping — use your judgement.
 
 ## Voice & Tone
 

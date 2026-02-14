@@ -136,7 +136,7 @@ Read the LinkedIn style guide: `references/linkedin-style.md`
 LinkedIn posts have **2 parts**: a mainpost + 1 reply.
 
 **Mainpost** (1200-1800 characters):
-- 🚨 hook → context → author attribution → mechanism → impact → hashtags
+- [1-2 emoji matching the paper's topic] hook → context → author attribution → mechanism → impact → hashtags
 - **No links in the mainpost** — all links go in the reply
 - Author names written as `@Name (Institution)` format for easy tagging
 - `#PaperOfTheDay` always first hashtag

@@ -12,7 +12,7 @@
 
 ### Mainpost
 ```
-🚨 [Hook line — provocative question, surprising claim, or stakes statement]
+[1-2 emoji] [Hook line — provocative question, surprising claim, or stakes statement]
 
 [Context paragraph: 1-2 sentences on the problem/challenge this paper addresses.
 Be specific about WHY this problem matters.]
@@ -47,6 +47,24 @@ Avoid vague "transforms the field" language.]
 ```
 
 **Important**: Only use Bohrium paper links in replies, NOT arXiv links. Drive traffic to Bohrium.
+
+## Opening Emoji
+
+**Don't default to 🚨 every time.** The opening emoji should match the paper's topic and tone. Use 1 or 2 emojis.
+
+Examples:
+- 🧬 genetics/biology paper
+- 🧠 neuroscience or cognitive science
+- ⚡ energy, physics, performance breakthroughs
+- 🔬 experimental methods, lab work
+- 💊 drug discovery, medical
+- 🤖 robotics, AI agents
+- 🧪 chemistry, materials science
+- 🌍 climate, earth science
+- 🔥 surprisingly strong results (any field)
+- 🚨 urgent/safety implications, corrections
+
+Combine when appropriate: 🧬🔬 for a genomics methods paper, 🤖⚡ for efficient AI systems.
 
 ## Voice & Tone
 
@@ -122,7 +140,7 @@ This breakthrough transforms the battle with pancreatic cancer...
 
 **Mainpost:**
 ```
-🚨 Pancreatic cancer tumors — gone. 200 days, no recurrence.
+💊🔬 Pancreatic cancer tumors — gone. 200 days, no recurrence.
 
 Pancreatic ductal adenocarcinoma has a nasty trick: block one driver
 like KRAS, and the cancer reroutes through EGFR or STAT3. Every

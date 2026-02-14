@@ -120,8 +120,31 @@ Pick whichever question produces the most compelling answer. That's your angle.
 
 Also identify:
 - **The core story** — what happened, why it matters
-- **3-4 scientific concepts** that underpin the story and would benefit from SciencePedia linking
+- **3-4 scientific concepts** that underpin the story and would benefit from SciencePedia linking (see **Concept Depth Rule** below)
 - **Taggable entities** — who/what can we @mention? (see Step 1b)
+
+#### Concept Depth Rule
+
+**Go specific, not generic.** The thread replies should teach readers something they didn't already know. A concept that makes someone say "oh, THAT'S what's happening under the hood" is worth 10x more than a Wikipedia-level umbrella term.
+
+**Banned umbrella concepts** (unless the post is literally about the umbrella topic itself):
+- ❌ large language models — too broad, everyone already knows what an LLM is
+- ❌ artificial intelligence — meaningless as an annotation
+- ❌ machine learning / deep learning — too generic for a CS-literate audience
+- ❌ neural network — same energy as annotating "computer" in a software story
+
+**Instead, go one or two levels deeper:**
+| Instead of... | Try... |
+|--------------|--------|
+| large language models | attention mechanism, transformer, tokenization, context window |
+| machine learning | reinforcement learning, scaling law, knowledge distillation, transfer learning |
+| deep learning | fine-tuning, mixture of experts, diffusion model, backpropagation |
+| artificial intelligence | RLHF, chain of thought, emergent behavior, alignment |
+| neural network | convolutional neural network, recurrent neural network, graph neural network |
+
+**The test:** If a reader who follows AI news would roll their eyes at the concept, it's too shallow. If they'd screenshot the thread reply and share it, you've hit the right depth.
+
+**Exception:** For non-CS audiences (pop culture angles, health news, sports science), broader concepts are fine because the reader genuinely may not know them. The depth rule applies specifically to CS/AI/ML coverage where the audience is technical.
 
 ### Step 1b: Find @Mentions for Maximum Exposure
 
@@ -165,6 +188,8 @@ python3 ~/.claude/skills/sciencepedia/scripts/lookup.py "Concept 1" "Concept 2" 
 6. If still NOT FOUND after 3 attempts, drop the concept — don't force a bad match
 
 Aim for 3-4 valid entries. 2 is acceptable if the others genuinely don't exist.
+
+**Depth check before finalizing:** Review your concept list against the Concept Depth Rule (Step 1). If you're covering AI/CS news and your list includes "large language models" or "deep learning," replace it with something more specific. The fallback strategy above (step 4: try the broader parent concept) is a last resort, not the default — always start narrow and only broaden if the specific concept genuinely doesn't exist in SciencePedia.
 
 ### Step 3: Write the Mainpost
 

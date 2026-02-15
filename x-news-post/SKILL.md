@@ -166,15 +166,29 @@ Also identify:
 **Guidelines:**
 - Aim for **2-4 @mentions** per mainpost. Don't overdo it — a wall of @'s looks spammy
 - **Weave @mentions naturally into sentences.** Don't dump them at the end. Write: "A team at @CHOP designed a therapy from scratch" not "A team at Children's Hospital of Philadelphia (@CHOP) designed..."
-- If you can't confirm an account exists or is active, skip it. Wrong @handles look unprofessional
 - **Prioritize accounts with large followings** — a retweet from @NASA or @NFL is worth more than from a 500-follower lab account
-- For scientists: only tag if they have a public, active X account. Don't guess handles
+
+#### MANDATORY: @Handle Identity Verification
+
+**Before tagging ANY personal account (scientists, journalists, individuals), you MUST verify the account actually belongs to the intended person.** Same-name collisions are common on X — a researcher named "Ramy Saad" might share a handle with a FIFA esports player. Tagging the wrong person is unprofessional and sends confusing notifications.
+
+**Verification steps (required for every individual @mention):**
+1. **Find the handle** via web search: `"[person name]" site:x.com OR twitter.com`
+2. **Check the account's bio/profile.** Visit or search for the account and confirm:
+   - Bio mentions their field, institution, or role relevant to the story
+   - Recent posts are topically consistent (a genetics researcher should be posting about science, not FIFA)
+   - If the account has no bio or an unrelated bio, it's the wrong person
+3. **Cross-reference** with the person's institutional page, personal website, or Google Scholar — do they link to this X account?
+
+**If ANY of these checks fail → do NOT tag.** Write the person's name as plain text instead (e.g., "Dr. Ramy Saad" instead of "@Ramy__Saad"). A missing @mention is invisible; a wrong @mention is embarrassing.
+
+**This rule does NOT apply to verified organization accounts** (@NASA, @Nature, @DeepMind, etc.) — those are unambiguous. It applies specifically to individual people where name collisions are likely.
 
 **Quick lookup approach:**
 ```
 Web search: "[entity name]" site:x.com OR twitter.com
 ```
-If you can't verify the handle, just mention the name without the @ — still good for SEO and quote-tweet discovery.
+If you can't verify the handle AND the identity, just mention the name without the @ — still good for SEO and quote-tweet discovery.
 
 ### Step 2: Look Up SciencePedia Entries
 
@@ -512,6 +526,7 @@ This discovery is remarkable. It challenges our understanding of stellar formati
 ### @Mentions & Reach
 - [ ] 2-4 @mentions woven naturally into the mainpost (not dumped at the end)
 - [ ] Handles verified as real and active — no guessed handles
+- [ ] **Individual @handles identity-verified** — bio/profile checked to confirm the account belongs to the intended person, not a same-name collision
 - [ ] At minimum: one organization/event + one scientist or journalist if available
 
 ### Format

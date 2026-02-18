@@ -18,7 +18,7 @@ User provides one or more of:
 
 ## Workflow
 
-### Step 1: Extract Paper Metadata
+### Step 1: Extract Paper Metadata & Download Full Text
 
 From arXiv link or PDF, extract:
 - Title, authors, institutions
@@ -34,6 +34,22 @@ Read the abstract page. Look for:
 - Author list and affiliations
 - "Code: github.com/..." links
 - Related project pages
+
+#### Download and Read Full Paper
+
+If the user provided an arXiv link, download the PDF for full-text reading:
+```bash
+# Download PDF to ~/Downloads/
+curl -L -o ~/Downloads/{arxiv_id}.pdf "https://arxiv.org/pdf/{arxiv_id}"
+```
+
+Then use the **Read tool** to read the full PDF (use `pages` parameter for large papers, e.g., read 20 pages at a time). This gives you:
+- **Method details** — for writing accurate mechanism paragraphs in the posts
+- **Specific numbers** — benchmark results, improvement percentages, dataset sizes
+- **Figure descriptions** — know exactly which figures exist and what they show
+- **Limitations section** — for the "honest caveat" in LinkedIn posts
+
+The downloaded PDF is also used in Step 3 for automatic figure extraction.
 
 ### Step 2: Bohrium Link Lookup
 
@@ -58,34 +74,30 @@ If the paper is found, provide the Bohrium URL to the user — they'll need it f
 
 If NOT found: tell the user. They may need to manually search bohrium.com or skip the Bohrium screenshot.
 
-### Step 3: Image Suggestions
+### Step 3: Extract & Select Images
 
-Suggest 4 images for the post (the standard Bohrium Paper of the Day format):
+Prepare 4 images for the post (the standard Bohrium Paper of the Day format):
 
-#### Image 1-2: Paper/Repo Figures
+#### Image 1-2: Extract Figures from PDF
 
-Analyze the paper for the best visual assets. Prioritize:
+Run the bundled figure extraction script on the downloaded PDF:
+```bash
+# Default: saves top 2 figures to ~/Downloads/ with auto-naming
+python3 scripts/extract_figures.py ~/Downloads/{arxiv_id}.pdf --prefix POTD-{MMDD}
 
-1. **Architecture/pipeline diagrams** (Figure 1 is often the overview) — these explain the method at a glance
+# Want more? Use --top 4 or --all
+python3 scripts/extract_figures.py ~/Downloads/{arxiv_id}.pdf --top 4
+```
+
+The script scores all images by a heuristic (page position 40%, file size 30%, resolution 15%, aspect ratio 15%) that favors main-body figures over appendix sample grids. Only the top 2 are saved by default.
+
+After extraction, use the **Read tool** to visually inspect the saved images and confirm they're the right picks. Prioritize:
+
+1. **Architecture/pipeline diagrams** (Figure 1 is often the overview) — explain the method at a glance
 2. **Result comparison figures** — before/after, side-by-side, ablation tables with visual impact
-3. **GIFs/animations from repo** — if the GitHub repo has demo GIFs in README, these are gold
-4. **Teaser figures** — many ML papers have a "teaser" figure showing the key result visually
+3. **Teaser figures** — many ML papers have a "teaser" figure showing the key result visually
 
-Output format:
-```
-### Image Suggestions
-
-📸 Image 1 (recommended): Figure 2 — System architecture diagram (page 3)
-   Why: Clean pipeline overview, shows the three-stage approach at a glance
-
-📸 Image 2 (recommended): Figure 5 — Comparison with baselines (page 7)
-   Why: Visual results comparison, immediately shows improvement
-
-🎬 Repo GIF alternative: README demo animation showing [description]
-   URL: [direct link to the image/gif in the repo]
-```
-
-If a GitHub repo exists, search for images:
+Also check the GitHub repo for GIFs/animations (these are gold for engagement):
 ```
 Web search: site:github.com {repo path} readme
 ```
@@ -93,12 +105,11 @@ Look for `.gif`, `.png`, `.mp4` files in the repo root, `assets/`, `docs/`, `fig
 
 #### Image 3: Bohrium Screenshot
 
-If Step 2 found the paper on Bohrium, provide the URL:
+If Step 2 found the paper on Bohrium, take a screenshot automatically:
+```bash
+python3 scripts/bohrium_screenshot.py "{bohrium_url}" -o ~/Downloads/POTD-{MMDD}-bohrium.png
 ```
-📸 Image 3: Bohrium paper page screenshot
-   URL: {bohrium_url}
-   → User takes screenshot manually
-```
+The script uses Playwright (headless Chromium) to load the page, wait for dynamic content, dismiss popups, and save a 1280×900 viewport screenshot.
 
 #### Image 4: AI Poster
 
@@ -137,8 +148,11 @@ LinkedIn posts have **2 parts**: a mainpost + 1 reply.
 
 **Mainpost** (1200-1800 characters):
 - [1-2 emoji matching the paper's topic] hook → context → author attribution → mechanism → impact → hashtags
+- **Hook must be accessible** — open with a plain-language question or claim that a non-expert can understand ("Today's best image generators need dozens of steps to produce one picture. What if you could do it in one?"). Save technical terms for the mechanism paragraph, after the reader has context
+- **No math symbols** — avoid ||V||², α, θ, etc. on LinkedIn. Write "squared magnitude of V" or "the loss directly measures remaining drift" instead. Mathematical notation looks like garbled text to most LinkedIn readers
 - **No links in the mainpost** — all links go in the reply
 - Author names written as `@Name (Institution)` format for easy tagging
+- **Only @mention authors with confirmed LinkedIn profiles.** If an author has no LinkedIn, mention them by name without the @ prefix, or restructure the sentence to lead with the team/institution and weave in @tagged authors who do have LinkedIn. Never @mention someone you can't link to. Note: this is platform-specific — LinkedIn tags LinkedIn profiles, X tags X profiles. An author only needs the relevant platform's profile to be tagged there; having both is not required
 - `#PaperOfTheDay` always first hashtag
 - **Vary the framing** — don't use "milestone study", "breakthrough transforms", "charts a new path" every time. See anti-patterns in the style guide
 - **More technical depth than X** — explain the mechanism, include specific numbers/benchmarks
@@ -154,14 +168,14 @@ LinkedIn posts have **2 parts**: a mainpost + 1 reply.
 
 ### Step 6: Generate X Post
 
-X posts have **2 parts**: a mainpost + 1 thread. Minimal emoji — only 🚨 for the hook line, nothing else.
+X posts have **2 parts**: a mainpost + 1 thread. Minimal emoji — only 1 emoji for the hook line, nothing else.
 
 **Superscript annotations:** Mark 3 key concepts in the mainpost text with superscript numbers ¹ ² ³. Place each superscript right after the first natural mention of the concept. These correspond to numbered SciencePedia entries in the thread.
 
 **Mainpost structure:**
 
 ```
-🚨 [Hook — tension or surprising claim, one sentence]
+[1 emoji matching the paper's topic] [Hook — tension or surprising claim, one sentence]
 
 #POTD | [One-sentence summary of the core finding/contribution]
 
@@ -177,10 +191,10 @@ Paper and explainers below. [Venue/acceptance info]
 ```
 
 **Writing guidelines:**
-- **No emoji** except 🚨 on the hook line. No 📑📍🔷👇1️⃣ etc.
+- **One emoji only** on the hook line, chosen to match the paper's content (e.g., ⚡ for speed/efficiency, 🌑 for astrophysics, 🧬 for biology, 💊 for drug discovery). **Don't default to 🚨 every time.** No other emoji in the post — no 📑📍🔷👇1️⃣ etc.
 - **No links in the mainpost** — all links go in the thread
 - `#POTD` (Paper of the Day) always on the second line. No other hashtags in X mainpost — `#POTD` is the only one
-- @handles woven naturally with (Institution) after the group
+- @handles woven naturally with (Institution) after the group. **Only @mention authors with confirmed X/Twitter profiles.** Authors without X should be mentioned by name without @handle. Platform-specific: X tags X profiles, LinkedIn tags LinkedIn profiles
 - **Closing line** — always "Paper and explainers below." (not "code below" — we don't promote raw repo links in the mainpost)
 - **Superscript placement** — attach ¹ ² ³ to key technical terms where they first appear naturally. Don't force all three into one sentence
 - **Wording matters** — don't write like a paper abstract. Use tension in the hook ("Right answers, wrong lesson"), explain *why* something fails, not just *that* it fails. Concrete > abstract
@@ -219,10 +233,10 @@ Show everything together for user review:
 |--------|----------|-----------|------------|
 | ... | ... | ... | ... |
 
-### 📸 Image Plan
-1. {figure suggestion 1}
-2. {figure suggestion 2}
-3. Bohrium screenshot: {url}
+### 📸 Images
+1. {extracted figure 1 — path + description}
+2. {extracted figure 2 — path + description}
+3. Bohrium screenshot: ~/Downloads/POTD-{MMDD}-bohrium.png
 4. AI Poster: generate on bohrium.com
 
 ### LinkedIn Post

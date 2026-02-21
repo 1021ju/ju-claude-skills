@@ -27,7 +27,7 @@ def take_screenshot(url: str, output: str = "", wait_ms: int = 3000):
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 1280, "height": 900})
+        page = browser.new_page(viewport={"width": 1600, "height": 1000})
 
         print(f"Loading {url} ...")
         page.goto(url, wait_until="networkidle", timeout=30000)
@@ -45,7 +45,17 @@ def take_screenshot(url: str, output: str = "", wait_ms: int = 3000):
             except Exception:
                 pass
 
-        page.screenshot(path=output, full_page=False)
+        # Crop out the left sidebar and top nav by clipping the main content area
+        # Sidebar is ~220px wide, top nav is ~50px tall on Bohrium paper pages
+        clip_x = 220
+        clip_y = 0
+        clip_width = 1600 - clip_x
+        clip_height = 940
+
+        page.screenshot(path=output, full_page=False, clip={
+            "x": clip_x, "y": clip_y,
+            "width": clip_width, "height": clip_height
+        })
         browser.close()
 
     print(f"Screenshot saved: {output}")
